@@ -34,11 +34,8 @@
     "typescript": "^3.0.3"
   },
   "dependencies": {
-    "appium": "^1.9.1",
     "axios": "^0.18.0",
     "di-typescript": "^1.1.4",
-    "reflect-metadata": "^0.1.12",
-    "wd": "^1.10.3",
-    "wd-bridge": "0.0.2"
+    "reflect-metadata": "^0.1.12"
   }
 }

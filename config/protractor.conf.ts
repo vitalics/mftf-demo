@@ -1,7 +1,6 @@
+import { setDefaultTimeout } from 'cucumber';
 import { PerformanceObserver } from 'perf_hooks';
 import { browser, Config } from 'protractor';
-
-import { environment } from './environment';
 
 export const obs = new PerformanceObserver((list) => {
     list.getEntries().forEach((entrie) => {
@@ -9,8 +8,12 @@ export const obs = new PerformanceObserver((list) => {
         console.dir(`${casted[0].__proto__.constructor.name}.${entrie.name} ${entrie.duration} ms`);
     });
 });
-
-const { mobileConfig } = environment;
+/*
+The config folder includes all the configuration files
+This example config file displays the basic protractor-cucumber framework configuration
+ts-node compiler is needed for cucumberjs
+tags option for specific scenarios added
+**/
 export let config: Config = {
     baseUrl: 'https://epam.com',
 
@@ -22,9 +25,6 @@ export let config: Config = {
             //     deviceName: 'Pixel 2',
             // },
         },
-        // deviceName: mobileConfig.DEVICE_NAME,
-        deviceName: 'emulator-5554',
-        // platformVersion: mobileConfig.PLATFORM_VERSION,
         shardTestFiles: true,
     },
     // These are various cucumber compiler options
@@ -35,8 +35,19 @@ export let config: Config = {
         // tags help us execute specific scenarios of feature files
         tags: '',
     },
-    directConnect: true,
-    
+    seleniumAddress: 'http://localhost:4444/wd/hub',
+    // seleniumAddress: `http://${mobileConfig.PROJECT_NAME}:${mobileConfig.API_KEY}@${mobileConfig.APPIUM_HUB}/wd/hub`,
+    // multiCapabilities: [
+    //     {
+    //         autoWebview: true,
+    //         accessKey: mobileConfig.API_KEY,
+    //         username: mobileConfig.PROJECT_NAME,
+    //         browserName: mobileConfig.BROWSER_NAME,
+    //         deviceName: mobileConfig.DEVICE_NAME,
+    //         platformName: mobileConfig.PLATFORM_NAME,
+    //         platformVersion: mobileConfig.PLATFORM_VERSION,
+    //     },
+    // ],
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
     // This utility function helps prepare our scripts with required actions like browser maximize
@@ -45,6 +56,7 @@ export let config: Config = {
 
         browser.waitForAngularEnabled(false);
         browser.ignoreSynchronization = true;
+        setDefaultTimeout(60 * 1000);
         browser.driver.manage().window().setSize(1024, 768);
     },
     // tslint:disable-next-line:object-literal-sort-keys
@@ -57,8 +69,14 @@ export let config: Config = {
         '../../src/features/*.feature',
     ],
 
-    plugins: [
-    ],
+    plugins: [{
+        package: 'protractor-multiple-cucumber-html-reporter-plugin',
+        options: {
+            // read the options part for more options
+            automaticallyGenerateReport: true,
+            removeExistingJsonReportFile: true,
+        },
+    }],
 
     // tslint:disable-next-line:object-literal-sort-keys
     webDriverLogDir: './logs',
