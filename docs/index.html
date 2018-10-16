@@ -1,0 +1,293 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Meganto PWA testing framework documentation</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Meganto PWA testing framework documentation</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> Meganto PWA testing framework documentation</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="pwa-e2e-testing-module">PWA E2E testing module</h1>
+				<h2 id="how-to-launch">how to launch</h2>
+				<p><code>npm i</code></p>
+				<p><code>npm test</code></p>
+				<h2 id="how-to-generate-docs">how to generate docs</h2>
+				<p><code>npm run docs</code> - generate <code>docs</code> folder with you can open in browser locally without server</p>
+				<h2 id="how-to-debug">how to debug</h2>
+				<p>vscode.</p>
+				<p>Go to debug tab and run <code>launch</code> command. If you have to breakpoint, you might to stop on them</p>
+				<h2 id="architecture-overview">Architecture overview</h2>
+				<pre><code>pwa-e2e
+.
+├──docs &lt;-- here is result 'npm run docs' command
+├──components &lt;-- PWA components logic
+| <span class="hljs-type">├──abstract</span>.component.ts &lt;-- basic component
+| <span class="hljs-type">|  ├──ComponentFolder1</span>
+| <span class="hljs-type">|  ├──index</span>.ts
+| <span class="hljs-type">|  ├──Component1</span>.ts
+├──config &lt;-- configurations
+| <span class="hljs-type">├──environment</span>.prod.ts
+| <span class="hljs-type">├──environment</span>.dev.ts
+| <span class="hljs-type">├──protractor</span>.conf.ts
+├──features &lt;-- BDD features, describe steps
+| <span class="hljs-type">├──checkout</span>.feature
+| <span class="hljs-type">├──addictional</span>.feature
+├──models &lt;-- describing models which you can use on pages <span class="hljs-keyword">for</span> filling
+| <span class="hljs-type">├──model</span>.ts
+| <span class="hljs-type">├──user</span>.model.ts &lt;-- each model might inherit from current
+├──pages &lt;-- pages, every page have a 'url' and 'title'
+| <span class="hljs-type">├──abstract</span>.page.ts
+| <span class="hljs-type">├──home</span>.page.ts
+├──services
+| <span class="hljs-type">├──http</span>.service.ts
+| <span class="hljs-type">├──another</span>.service.ts
+├──stepdefinitions &lt;-- folder which implementing feature files
+| <span class="hljs-type">├──base</span>.definition.ts &lt;-- here located <span class="hljs-built_in">before</span>/<span class="hljs-built_in">after</span> hooks
+| <span class="hljs-type">├──Common</span>
+| <span class="hljs-type">|  ├──some</span>.common.definition.ts &lt;-- here definitions which are repeated
+| <span class="hljs-type">├──Home</span>
+| <span class="hljs-type">|  ├──home</span>.definition.ts
+| <span class="hljs-type">|  ├──another</span>.home.definition.ts
+├──testcases &lt;-- test cases, <span class="hljs-keyword">for</span> defferent asserting
+| <span class="hljs-type">├──test</span>.<span class="hljs-built_in">case</span>.ts &lt;-- base test <span class="hljs-built_in">case</span>
+| <span class="hljs-type">├──home</span>
+| <span class="hljs-type">|  ├──home</span>.<span class="hljs-built_in">case</span>.ts &lt;-- constant <span class="hljs-built_in">with</span> predefined values
+| <span class="hljs-type">| ├──index</span>.ts
+| <span class="hljs-type">├──checkout</span>
+| <span class="hljs-type">| ├──default</span>.<span class="hljs-built_in">case</span>.ts
+| <span class="hljs-type">| ├──special</span>.<span class="hljs-built_in">case</span>.ts
+| <span class="hljs-type">| ├──index</span>.ts
+├──utils &lt;-- helpers
+| <span class="hljs-type">├──protractor</span>
+| <span class="hljs-type">| ├──element</span>.ts
+| <span class="hljs-type">| ├──elements</span>.ts
+| <span class="hljs-type">| ├──index</span>.ts
+| <span class="hljs-type">├──ioc</span>.ts &lt;-- dependency <span class="hljs-built_in">injection</span>
+├──.editorconfig
+├──.gitignore
+├──package.json
+├──readme.md
+├──tsconfig.json &lt;-- typescript options here
+├──tslint.json &lt;-- like jslint, but <span class="hljs-keyword">for</span> typescript
+├──typedoc.js &lt;-- tool <span class="hljs-keyword">for</span> autogeneration documentation based on code comments</code></pre><h2 id="qa">Q&amp;A</h2>
+				<p>Q: How i can distinguish utils and services?</p>
+				<p>A: Utils is a not scalable polyfill for existing solution. Such as <code>timerify</code> decorator in performance folder. You cannot extend this function by yourself, if you want to change logic for them, you need to create another function or change existing.</p>
+				<p>Q: Why <code>http.service.ts</code> is as &quot;service&quot;.</p>
+				<p>A: if you need to fetch some info(for example product), you need to implement <code>product.service.ts</code> or <code>product.http.service.ts</code> and inside them, you need to inherit from <code>http.service.ts</code> and describe your types</p>
+				<p>Q: Why we choose typescript?</p>
+				<p>A: Typescript is a JavaScript that scales, if you watch a features, which javascript get from the last 3-4 years, you can see that is was been from <code>tc39</code> commitee. And javascript creating more object-oriental principles.
+					By the way, we&#39;re all humans and make a mistakes(types too), and typescript fix problem with typings
+				Nevertheless, javascript is a valid typescript. If you want to migrate them from js, you might to see official guides how you can do it.</p>
+				<p>Q: Why we need to create <code>index.ts</code> file?</p>
+				<p>A: we need to export our code to parent module for better visualizing.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { A } <span class="hljs-keyword">from</span> <span class="hljs-string">'modules/moduleA'</span></code></pre>
+				<p>instead of</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { A } <span class="hljs-keyword">from</span> <span class="hljs-string">'modules/moduleA/moduleA'</span></code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/basedefinition.html" class="tsd-kind-icon">Base<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/component.html" class="tsd-kind-icon">Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/headercomponent.html" class="tsd-kind-icon">Header<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/headeritemcomponent.html" class="tsd-kind-icon">Header<wbr>Item<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/homepage.html" class="tsd-kind-icon">Home<wbr>Page</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/httpservice.html" class="tsd-kind-icon">Http<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/page.html" class="tsd-kind-icon">Page</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/productservice.html" class="tsd-kind-icon">Product<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="classes/temp.html" class="tsd-kind-icon">Temp</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/usermodel.html" class="tsd-kind-icon">User<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/testcase.html" class="tsd-kind-icon">Test<wbr>Case</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#model" class="tsd-kind-icon">Model</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#injector" class="tsd-kind-icon">injector</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#productservice" class="tsd-kind-icon">product<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#inject" class="tsd-kind-icon">Inject</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#injectable" class="tsd-kind-icon">Injectable</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#component" class="tsd-kind-icon">component</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#components" class="tsd-kind-icon">components</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#element" class="tsd-kind-icon">element</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#elements" class="tsd-kind-icon">elements</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#timerify" class="tsd-kind-icon">timerify</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#usertestcase1" class="tsd-kind-icon">User<wbr>Test<wbr>Case1</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#defaultuser" class="tsd-kind-icon">default<wbr>User</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
