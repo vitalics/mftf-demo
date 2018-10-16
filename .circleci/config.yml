@@ -3,7 +3,7 @@ jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/repo # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/node:8.12.0 # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/node:8.9-stretch-browsers # ...with this image as the primary container; this is where all `steps` will run
     steps: # a collection of executable commands 
       - checkout # special step to check out source code to working directory
       - restore_cache: # special step to restore the dependency cache 
@@ -18,7 +18,7 @@ jobs: # a collection of steps
       - run: # run tests
           name: create log folder for webdriver
           command: |
-            mkdir logs
+            mkdir logs && java --version
       - run: # run tests
           name: update webdriver
           command: npm run e2e:update
