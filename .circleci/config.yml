@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12
-    working_directory: ~/pwa-e2e
+    working_directory: ~/
     steps:
       - checkout
       - restore_cache:
