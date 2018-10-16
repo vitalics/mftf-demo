@@ -2,12 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-       - image: circleci/node:8.12
+      - image: circleci/node:8.12
 
     steps:
-       - checkout
+      - checkout
 
-       - run: npm install
+      - run: npm install
 
        - run:
           name: update webdriver
