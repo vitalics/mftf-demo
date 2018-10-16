@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "node ./node_modules/protractor/bin/protractor ./bin/config/protractor.conf.js",
-    "test:ci": "npm run pretest && node ./node_modules/protractor/bin/protractor ./bin/config/protractor.conf.ci.js",
+    "test:ci": "npm run create:logs && npm run pretest && node ./node_modules/protractor/bin/protractor ./bin/config/protractor.conf.ci.js",
     "pretest": "tsc",
+    "create:logs": "mkdir logs",
     "e2e:update": "./node_modules/.bin/webdriver-manager update",
     "tsc": "tsc",
     "start:chrome": "./node_modules/.bin/webdriver-manager start --chrome",
