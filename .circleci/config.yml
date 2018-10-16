@@ -3,8 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12
-      - image: circleci/node-jessie-browsers
-
     working_directory: ~/Protractor-CircleCi
 
     steps:
@@ -17,18 +15,26 @@ jobs:
       - run:
           name: Download Selenium
           command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
-
-      - run: npm install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: npm install
+
+      - run:
+          name: update webdriver
+          command: npm run e2e:update
+          background: true
+
+      - run:
+          name: start webdriver
+          command: npm run start:chrome
+          background: true
+
       - run: npm run docs
+
       - store_artifacts: docs/index.html
+
       - run: npm test
