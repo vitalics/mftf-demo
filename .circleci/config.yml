@@ -26,6 +26,7 @@ jobs: # a collection of steps
           name: start webdriver
           command: npm run start:chrome
           background: true
+      - run: sleep 5
       - run: # run tests
           name: ci test
           command: npm run test:ci
