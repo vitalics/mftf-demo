@@ -18,7 +18,7 @@ jobs: # a collection of steps
       - run: # run tests
           name: create log folder for webdriver
           command: |
-            mkdir logs && node -v
+            mkdir logs && node -v && java -version
       - run: # run tests
           name: update webdriver
           command: npm run e2e:update
