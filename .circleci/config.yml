@@ -15,14 +15,14 @@ jobs: # a collection of steps
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run: # run tests
+      - run: # creatign folder for selenium logs
           name: create log folder for webdriver
           command: |
             mkdir logs && node -v && java -version
-      - run: # run tests
+      - run: # updating webdriver
           name: update webdriver
           command: npm run e2e:update
-      - run: # run tests
+      - run: # start webdriver
           name: start webdriver
           command: npm run start:chrome
           background: true
@@ -31,3 +31,6 @@ jobs: # a collection of steps
           name: ci test
           command: npm run test:ci
           timeout: 3
+
+      - store_artifacts:
+          path: ./docs
