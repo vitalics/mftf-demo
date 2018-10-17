@@ -9,6 +9,11 @@ jobs: # a collection of steps
       - restore_cache: # special step to restore the dependency cache 
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
+          name: info
+          command: |
+            lsb_release -a && node -v && npm -v && java -version
+
+      - run:
           name: install dependencies
           command: npm install
       - save_cache: # special step to save the dependency cache
@@ -30,7 +35,6 @@ jobs: # a collection of steps
       - run: # run tests
           name: ci test
           command: npm run test:ci
-          timeout: 3
 
       - store_artifacts:
           path: ./docs
